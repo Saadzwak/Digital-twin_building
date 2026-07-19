@@ -108,7 +108,8 @@ cached artifacts under `runs/` — **no download is needed to test**.
 
 The **full raw dataset** (the original sensor / consumption / weather dump the
 processed file is derived from) is optional and provided as `Data_Nature.zip` on the
-repository's **[Releases](../../releases)** page (it is too large for the git repo).
+repository's **[Releases](https://github.com/Saadzwak/Digital-twin_building/releases)**
+page (it is too large for the git repo).
 To reproduce the processing from scratch, download it, place `Data_Nature.zip` at the
 repo root, and the ingestion (`src/thermal_twin/reference_ingestion.py`) will extract
 and rebuild the processed file.
