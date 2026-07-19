@@ -5,7 +5,7 @@ uvicorn
 numpy
 pandas
 scipy
+PyMuPDF>=1.27,<2        # reads the 2D floor plans (needed to start the server + the upload flow)
 
-# Optional — NOT required to run the demo (the app ships pre-computed caches):
-#   PyMuPDF>=1.27,<2   # only to rebuild the 3D massing from the source PDF plans
-#   streamlit>=1.56,<2 # only for the legacy dashboard under dashboard/ (superseded)
+# Optional — only for the legacy Streamlit dashboard under dashboard/ (superseded by the web app):
+#   streamlit>=1.56,<2

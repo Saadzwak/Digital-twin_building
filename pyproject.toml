@@ -13,11 +13,10 @@ dependencies = [
   "numpy",
   "pandas",
   "scipy",
+  "PyMuPDF>=1.27,<2",
 ]
 
 [project.optional-dependencies]
-# Only needed to REBUILD the massing from the source PDF plans (the app ships a cache).
-geometry = ["PyMuPDF>=1.27,<2"]
 # Only for the legacy Streamlit dashboard under dashboard/ (superseded by the web app).
 legacy-dashboard = ["streamlit>=1.56,<2"]
 

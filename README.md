@@ -1,10 +1,19 @@
+<p align="center">
+  <img src="assets/best_paper_award.png" alt="Best Paper Award — SASBE / BDT 2026, Cambridge" width="760">
+</p>
+
 # Thermal Twin — a physics world-model of a building, from a plan and a CSV
 
-**Category: Work and productivity.**
+**Category: Work and productivity.** · Built by the corresponding author of the
+peer-reviewed, **Best-Paper-awarded** method it implements
+([see below](#built-on-peer-reviewed-award-winning-research)).
 
-An energy audit today costs thousands of euros, needs site visits, and takes
-months — and the result travels as a PDF between the owner, the engineering firm,
-the architect and the operator, each re-reading it from scratch. **Thermal Twin
+**For the French building sector** — owners / social landlords, engineering firms,
+architects and operators — using public French databases: **BDNB** (national building
+database), **ADEME DPE** (energy-performance diagnostics), and **IGN BD TOPO**
+(geometry). An energy audit today costs thousands of euros, needs site visits, and
+takes months — and the result travels as a PDF between the owner, the engineering
+firm, the architect and the operator, each re-reading it from scratch. **Thermal Twin
 turns a floor plan and one CSV of hourly measurements into a physics-constrained
 digital twin of the building** — a *world model* that reproduces a year of real
 thermal behaviour and can **simulate counterfactuals**: what the building *would
@@ -71,60 +80,78 @@ social-housing building, **98 Rue des Sarrazins, Wazemmes, Lille**, from its pub
 
 ---
 
-## Run it (Python 3.12)
+## Run it & test it — step by step for judges (Python 3.12)
 
+> ### 🔑 You need an OpenAI API key
+> GPT-5.6 powers the guide **and** the two QA checks (plan-reading vision + optimization
+> review). **Set your own `OPENAI_API_KEY`** to see them. Without a key the diagnosis
+> still runs end-to-end — the chat falls back to a deterministic guide and the QA
+> endpoints report `available: false` — but the GPT-5.6 features are off. The public
+> repo intentionally contains **no key**.
+
+### 1 · Install (one command)
 ```bash
-# 1. install
 python -m pip install -r requirements.txt
+```
+Installs `fastapi uvicorn numpy pandas scipy PyMuPDF`. No database, no build step, no
+account. (Python **3.12** recommended.)
 
-# 2. (optional) enable the GPT-5.6 guide — without a key the chat falls back to a
-#    deterministic guide, so the app still runs end-to-end.
-export OPENAI_API_KEY=<your-openai-api-key>        # Windows PowerShell: $env:OPENAI_API_KEY="..."
-export OPENAI_CHAT_MODEL=gpt-5.6-terra             # optional; default is gpt-5.6-terra
+### 2 · Add your OpenAI API key
+```bash
+# macOS / Linux
+export OPENAI_API_KEY="sk-…your key…"
+export OPENAI_CHAT_MODEL="gpt-5.6-terra"      # optional (this is the default)
 
-# 3. launch
+# Windows PowerShell
+$env:OPENAI_API_KEY = "sk-…your key…"
+$env:OPENAI_CHAT_MODEL = "gpt-5.6-terra"
+```
+
+### 3 · Launch
+```bash
 cd webapp
 python -m uvicorn server:app --port 61740
 ```
+On startup you should see **`[chat] OpenAI LLM enabled — model gpt-5.6-terra`** (or the
+fallback line if you skipped step 2). Open **http://localhost:61740/** in a real
+desktop browser (Chrome / Edge / Firefox, WebGL on for the 3D building).
 
-Open **http://localhost:61740/**. On startup you'll see either
-`[chat] OpenAI LLM enabled — model gpt-5.6-terra` or
-`[chat] OPENAI_API_KEY not set — chat falls back to the deterministic guide`.
+### 4 · Test it — two ways, both from files already in the repo
 
-The app ships **pre-computed caches**, so the whole demo runs **offline** with just
-`fastapi uvicorn numpy pandas scipy` — no database, no build step, no external
-account required to see the diagnosis.
+**Path A · one-click demo (fastest).** On the landing page click
+**“▶ Run the demo diagnosis.”** It runs on two real inputs already committed here — the
+2D floor plan [`Edificio PLEIADES (planta baja).pdf`](Edificio%20PLEIADES%20%28planta%20baja%29.pdf)
+and one year of hourly measurements
+[`data/processed/hourly_reference.csv`](data/processed/hourly_reference.csv):
+1. Watch the live run — the structure counter climbs **1 → 19** as it searches the
+   physical model space (~34 s), the RC schematic reconfigures, the 3D building reveals.
+2. Click **“Continue to the dashboard.”**
+3. **01 The building** — the real record (DPE class F, current bill and emissions, all computed).
+4. **Switch roles** in the top bar (**Owner / Engineering / Architect / Operator**): the
+   page visibly reorganises around each trade; “The building” stays first for everyone.
+5. **Drag to rotate / scroll to zoom** the 3D building — a real **IGN BD TOPO** footprint
+   (with setbacks) at real height, among its real neighbours. *(WebGL off → it falls back
+   to a real IGN-ortho map, never blank.)*
+6. Scroll to **04 The decision** — renovation scenarios ranked by payback (€, CO₂, grants).
+7. Open the **“◆ Guide”** bottom-right (this is **GPT-5.6**) and ask e.g.
+   *“honestly, how bad is this building and will it cost me a fortune?”*, then
+   *“will interest rates go down next year?”* — it **refuses and offers the closest
+   answerable thing**, and never invents a number.
 
-## How judges test it (2 minutes)
+**Path B · upload the sample data yourself.** On the landing page choose
+**“Analyze my files,”** pick the CSV
+[`data/processed/hourly_reference.csv`](data/processed/hourly_reference.csv)
+(columns `Date, Tin, Tout, Qhvac_W_A`), optionally drop the 2D plan
+[`Edificio PLEIADES (planta baja).pdf`](Edificio%20PLEIADES%20%28planta%20baja%29.pdf),
+then click **Analyze**. This runs the **full live pipeline** (not a replay): it reads the
+2D plan server-side to build the geometry and identifies the twin on your CSV. To try
+another building, upload any CSV with the same four columns.
 
-1. On the landing page, click **"▶ Run the demo diagnosis"**. Watch the live view:
-   the structure counter climbs **1 → 19** as it searches the physical model space
-   (~34 s), the RC schematic reconfigures, the building reveals.
-2. Click **"Continue to the dashboard."**
-3. **01 The building** shows the real record (DPE class F, current bill and
-   emissions computed).
-4. **Switch roles** in the top bar (Owner / Engineering / Architect / Operator) —
-   the page visibly reorganises around each trade; "The building" stays first.
-5. **Drag to rotate / scroll to zoom** the 3D building — a real BD TOPO footprint
-   (with setbacks) extruded to real height, among its real neighbours. *(If your
-   browser has WebGL disabled it falls back to a real IGN-ortho map — never blank.)*
-6. Scroll to **04 The decision** — renovation options ranked by payback (€, CO₂,
-   grants).
-7. Open the **"◆ Guide"** (bottom-right) and ask anything, e.g.
-   *"honestly, how bad is this building and will it cost me a fortune?"* — with a key
-   this is **GPT-5.6**; then ask *"will interest rates go down next year?"* to see it
-   **refuse and offer the closest answerable thing**.
-
-**GPT-5.6 QA endpoints (evidence).** With a key set, you can hit the two internal
-supervision endpoints directly:
+### 5 · GPT-5.6 QA checks (evidence — needs the key)
 ```bash
-curl http://localhost:61740/api/verify-geometry     # vision QA of the extracted footprint
-curl http://localhost:61740/api/verify-selection     # GPT-5.6 review of the model-selection bench
+curl http://localhost:61740/api/verify-geometry     # GPT-5.6 VISION: verifies the plan-reading (the extracted footprint)
+curl http://localhost:61740/api/verify-selection    # GPT-5.6: reviews the model-selection optimization
 ```
-
-**Testing the real GPT-5.6 path:** the public repo contains **no API key**. To let
-GPT-5.6 run (guide + both QA endpoints), set your own `OPENAI_API_KEY` (step 2).
-Without it, the app is fully functional on the deterministic fallback.
 
 ## Run the tests
 
@@ -182,10 +209,17 @@ Repo layout (essentials): [`webapp/`](webapp) (product), [`src/thermal_twin/`](s
 
 ## How Codex and GPT-5.6 were used
 
-**Codex** implemented and tested the scientific core — the author's own published
-method ([`paper_RC_structure_selection.pdf`](paper_RC_structure_selection.pdf), above).
+> **In one line:** **Codex** compressed weeks of research-code archaeology and
+> reimplementation into a **tested** engine, and **GPT-5.6 — including its vision —**
+> turned that engine into a tool four trades can actually use and audit. A domain
+> researcher shipped a working product in days, not months, because of these two.
+
+**Codex — the accelerator.** It implemented and tested the scientific core — the
+author's own published method
+([`paper_RC_structure_selection.pdf`](paper_RC_structure_selection.pdf), above).
 Working from the paper and the research notebook, it re-specified the pipeline into a
-tested engine: it extracted the **19 xR+yC connectivities**, the simulation protocol
+tested engine **in a fraction of the time a from-scratch reimplementation would
+take**: it extracted the **19 xR+yC connectivities**, the simulation protocol
 and the data pipeline, and listed the divergences it found between the published
 method and the notebook code. It reimplemented the identification engine — topologies, the
 continuous state-space, **exact discretization by matrix exponential**, an
@@ -206,7 +240,8 @@ and found and fixed the bugs surfaced during verification. The repository ships
 **GPT-5.6** is used in **three places** — model **gpt-5.6-terra** (the `gpt-5.6`
 alias routes to Sol; the low-latency variant is used for the live demo), all via the
 OpenAI Chat Completions API. GPT-5.6 is what makes a correct-but-opaque engine
-**usable by four trades and auditable**; it never computes an engineering value.
+**usable by four trades and auditable** — from plain-language answers to
+**reading the floor plan with vision** — while it never computes an engineering value.
 
 1. **The in-product guide** — `POST /api/chat` ([`src/thermal_twin/llm_chat.py`](src/thermal_twin/llm_chat.py)). The
    **entire computed diagnosis** (building record, DPE, current cost/emissions, the
@@ -238,10 +273,9 @@ OpenAI Chat Completions API. GPT-5.6 is what makes a correct-but-opaque engine
    5 °C). *Why it matters:* the identification is initialization-sensitive by nature;
    an LLM audit of that fragile step catches what a single automated rule can miss.
 
-Uses 2 and 3 are grounded server-side QA capabilities (available as API endpoints);
-they inform the diagnosis internally and never overwrite an engine number. Without an
-`OPENAI_API_KEY`, all three degrade gracefully (the chat falls back to a deterministic
-guide; the supervisors report `available: false`) — the app still runs end-to-end.
+Without an `OPENAI_API_KEY`, all three degrade gracefully (the chat falls back to a
+deterministic guide; the supervisors report `available: false`) — the app still runs
+end-to-end.
 
 **What is *not* the models.** The numerical computation is classical, deterministic
 code — the RC identification, the matrix-exponential simulation, the carbon, cost
