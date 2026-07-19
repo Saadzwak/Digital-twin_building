@@ -14,8 +14,40 @@ trades read one source of truth** — no document handed off between them. A
 GPT-5.6 guide explains any of it in plain language, grounded strictly on the
 computed numbers.
 
-The subject building is real: **98 Rue des Sarrazins, Wazemmes, Lille** (public
-building and energy-performance registries).
+---
+
+## Built on peer-reviewed, award-winning research
+
+The physics engine is not a hackathon approximation — it is a faithful
+implementation of the project author's own **peer-reviewed method**:
+
+> **Systematic xR+yC Structure Selection for RC-Based Building Digital Twins:
+> Accuracy–Complexity Trade-Off and Practical Identifiability Considerations Under
+> Real Operational Data** — S. El Babidi, S. Zoumehri, Z. Lafhaj, R. Zerrari,
+> L. Ducoulombier. *Centrale Lille · Univ. Lille · CNRS, UMR 9013 – LaMcube, Lille,
+> France.* **Selected for the Best Paper Award — SASBE / BDT 2026 (Cambridge).**
+>
+> 📄 Paper: [`paper_RC_structure_selection.pdf`](paper_RC_structure_selection.pdf) ·
+> 🖥 Slides: [`presentation_SASBE_BDT_2026.pdf`](presentation_SASBE_BDT_2026.pdf)
+
+The **19 RC (xR+yC) structures**, the accuracy–complexity trade-off, the BIC-based
+selection, and the **practical-identifiability / degeneracy** analysis you find in
+this repository *are* that method — implemented in
+[`src/thermal_twin/rc_core.py`](src/thermal_twin/rc_core.py),
+[`identification.py`](src/thermal_twin/identification.py) and
+[`multistart_impl.py`](src/thermal_twin/multistart_impl.py), tested (**87 tests**),
+and wrapped into a usable product. This is the angle: **a domain researcher turning
+his own published, award-winning work into a working tool with Codex and GPT-5.6** —
+an expert of the field putting these models to work, not a toy.
+
+**Data provenance (open and real on both sides).** The thermal twin is identified on
+real operational measurements from the **open PLEIAData dataset** (Martínez Ibarra,
+González-Vidal & Skarmeta, *Nature Scientific Data*, 2023 —
+📄 [`s41597-023-02023-3.pdf`](s41597-023-02023-3.pdf)): one year of hourly indoor and
+outdoor temperature and heating for a real building. The renovation and decision layer
+(cost, CO₂, subsidies, regulation, 3D map) is then contextualised on a real French
+social-housing building, **98 Rue des Sarrazins, Wazemmes, Lille**, from its public
+**BDNB / DPE** records. Nothing is fabricated.
 
 ---
 
@@ -118,55 +150,65 @@ and rebuild the processed file.
 
 ## Architecture
 
-- **Backend** — FastAPI (`webapp/server.py`) serving a vanilla-JS ES-module SPA
-  (`webapp/static/`), streaming the live run as NDJSON. Every JSON response is
-  sanitized (no NaN/Inf reaches the client).
-- **Identification engine** (`src/thermal_twin/`) — 19 RC (resistance–capacitance)
-  network topologies; continuous state-space with **exact discretization by matrix
-  exponential** (`rc_core.py`); **L-BFGS-B calibration in log-parameter space**
-  (`identification.py`, `multistart_impl.py`); metrics + **BIC** model selection.
-- **Renovation engine** (`renovation.py` + `data/fdes_static.json`) — deterministic
-  operational + embodied carbon, cost, and eligible-subsidy computation → the ROI
-  decision table.
-- **Real 3D geometry** (`building_3d.py`) — building footprints fetched from the
-  **IGN BD TOPO WFS** (public mapping service), cached; rendered with
-  MapLibre GL + deck.gl over IGN ortho tiles, with a static-tile fallback.
-- **GPT-5.6 layer** — the grounded guide (`llm_chat.py`) plus two QA supervisors
-  (`llm_supervisor.py`): a vision check of the plan-reading and a review of the
-  structure-selection optimization. See "How Codex and GPT-5.6 were used" below.
+- **Backend** — FastAPI ([`webapp/server.py`](webapp/server.py)) serving a vanilla-JS
+  ES-module SPA ([`webapp/static/`](webapp/static)), streaming the live run as NDJSON.
+  Every JSON response is sanitized (no NaN/Inf reaches the client).
+- **Identification engine** ([`src/thermal_twin/`](src/thermal_twin)) — 19 RC
+  (resistance–capacitance) network topologies; continuous state-space with **exact
+  discretization by matrix exponential** ([`rc_core.py`](src/thermal_twin/rc_core.py));
+  **L-BFGS-B calibration in log-parameter space**
+  ([`identification.py`](src/thermal_twin/identification.py),
+  [`multistart_impl.py`](src/thermal_twin/multistart_impl.py)); metrics + **BIC**
+  model selection.
+- **Renovation engine** ([`renovation.py`](src/thermal_twin/renovation.py) +
+  [`data/fdes_static.json`](data/fdes_static.json)) — deterministic operational +
+  embodied carbon, cost, and eligible-subsidy computation → the ROI decision table.
+- **Real 3D geometry** ([`building_3d.py`](src/thermal_twin/building_3d.py)) — building
+  footprints fetched from the **IGN BD TOPO WFS** (public mapping service), cached;
+  rendered with MapLibre GL + deck.gl over IGN ortho tiles, with a static-tile fallback.
+- **GPT-5.6 layer** — the grounded guide
+  ([`llm_chat.py`](src/thermal_twin/llm_chat.py)) plus two QA supervisors
+  ([`llm_supervisor.py`](src/thermal_twin/llm_supervisor.py)): a vision check of the
+  plan-reading and a review of the structure-selection optimization. See "How Codex
+  and GPT-5.6 were used" below.
 
-Repo layout (essentials): `webapp/` (product), `src/thermal_twin/` (engine),
-`tests/` (87 tests), `data/` (sample input + carbon factors),
-`runs/geometry/` & `runs/demo/reference/` (committed caches so it runs offline),
-`docs/DEMO_SCRIPT.md` (demo shoot pack).
+Repo layout (essentials): [`webapp/`](webapp) (product), [`src/thermal_twin/`](src/thermal_twin)
+(engine), [`tests/`](tests) (87 tests), [`data/`](data) (sample input + carbon factors),
+[`runs/geometry/`](runs/geometry) & [`runs/demo/reference/`](runs/demo/reference)
+(committed caches so it runs offline), [`docs/DEMO_SCRIPT.md`](docs/DEMO_SCRIPT.md)
+(demo shoot pack).
 
 ---
 
 ## How Codex and GPT-5.6 were used
 
-**Codex** reverse-engineered and rebuilt the scientific core. It read a research
-notebook on RC thermal models and re-specified it into a tested engine: it
-extracted the **19 network connectivities**, the simulation protocol and the data
-pipeline, and listed the divergences it found between the published article and the
-notebook code. It reimplemented the identification engine — topologies, the
+**Codex** implemented and tested the scientific core — the author's own published
+method ([`paper_RC_structure_selection.pdf`](paper_RC_structure_selection.pdf), above).
+Working from the paper and the research notebook, it re-specified the pipeline into a
+tested engine: it extracted the **19 xR+yC connectivities**, the simulation protocol
+and the data pipeline, and listed the divergences it found between the published
+method and the notebook code. It reimplemented the identification engine — topologies, the
 continuous state-space, **exact discretization by matrix exponential**, an
 **L-BFGS-B calibration loop in log-parameter space**, the error metrics and the BIC
 selection criterion. It then did the analysis that matters scientifically: a
 **multi-start stability study** showing that the best-fitting two-mass basins are
 *physically degenerate*, and a quantification of how the heat-loss level is **not
-robust across calibrations** — which is why the product surfaces the twin's
-structure and its uncertainty rather than a single false number. Codex also ported
-the **operational-carbon and subsidy engines** (reproducing the reference figures —
+robust across calibrations** — the practical-identifiability result the paper
+formalises, and why the product surfaces the twin's structure and its uncertainty
+rather than a single false number. Codex also ported the **operational-carbon and
+subsidy engines** ([`renovation.py`](src/thermal_twin/renovation.py) +
+[`data/fdes_static.json`](data/fdes_static.json), reproducing the reference figures —
 1,727 tCO₂ over 30 years, €650,400 — under test), retrieved the building's **real
-footprint from the IGN BD TOPO WFS**, and found and fixed the bugs surfaced during
-verification. The repository ships **87 passing tests**.
+footprint from the IGN BD TOPO WFS** ([`building_3d.py`](src/thermal_twin/building_3d.py)),
+and found and fixed the bugs surfaced during verification. The repository ships
+**87 passing tests**.
 
 **GPT-5.6** is used in **three places** — model **gpt-5.6-terra** (the `gpt-5.6`
 alias routes to Sol; the low-latency variant is used for the live demo), all via the
 OpenAI Chat Completions API. GPT-5.6 is what makes a correct-but-opaque engine
 **usable by four trades and auditable**; it never computes an engineering value.
 
-1. **The in-product guide** — `POST /api/chat` (`src/thermal_twin/llm_chat.py`). The
+1. **The in-product guide** — `POST /api/chat` ([`src/thermal_twin/llm_chat.py`](src/thermal_twin/llm_chat.py)). The
    **entire computed diagnosis** (building record, DPE, current cost/emissions, the
    heat-loss level and its direct-path share, the dated drift, the twin's structure
    and RMSE, every renovation scenario with €/CO₂/payback, subsidies, regulation,
@@ -182,14 +224,14 @@ OpenAI Chat Completions API. GPT-5.6 is what makes a correct-but-opaque engine
    language, with no document handoff.
 
 2. **Vision QA of the plan-reading** — `GET /api/verify-geometry`
-   (`src/thermal_twin/llm_supervisor.py`). GPT-5.6 **looks at the footprint polygon**
+   ([`src/thermal_twin/llm_supervisor.py`](src/thermal_twin/llm_supervisor.py)). GPT-5.6 **looks at the footprint polygon**
    the PyMuPDF reader extracted and judges whether it is a plausible single-building
    outline or shows extraction artifacts (self-intersection, a captured title block,
    a degenerate blob). *Why it matters:* a classical CV reader cannot self-diagnose a
    bad extraction; GPT-5.6 is the QA safety net over an automated pipeline.
 
 3. **Review of the optimization** — `GET /api/verify-selection`
-   (`src/thermal_twin/llm_supervisor.py`). GPT-5.6 audits the RC structure-selection
+   ([`src/thermal_twin/llm_supervisor.py`](src/thermal_twin/llm_supervisor.py)). GPT-5.6 audits the RC structure-selection
    bench and gives an independent second opinion. On the reference run it
    **independently flagged the degeneracy** the engine warns about (an
    over-parameterised structure reaching a suspiciously low error; near-ties around
