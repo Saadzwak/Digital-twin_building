@@ -1,0 +1,11 @@
+# Runtime dependencies for the web product (Python 3.12).
+# Install:  pip install -r requirements.txt
+fastapi
+uvicorn
+numpy
+pandas
+scipy
+
+# Optional — NOT required to run the demo (the app ships pre-computed caches):
+#   PyMuPDF>=1.27,<2   # only to rebuild the 3D massing from the source PDF plans
+#   streamlit>=1.56,<2 # only for the legacy dashboard under dashboard/ (superseded)

@@ -1,0 +1,43 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+build/
+dist/
+
+# --- Virtual environments ---
+.venv/
+venv/
+env/
+ENV/
+
+# --- Secrets / environment (never commit the OpenAI key) ---
+.env
+.env.*
+*.env
+secrets.*
+
+# --- OS / editors ---
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# --- Scratch and dev backups (not part of the product) ---
+tmp/
+scratchpad/
+*.pre_*
+runs/demo/pytest/
+runs/demo/latest/
+
+# --- Full raw dataset: NOT needed to run/test; distributed via a GitHub Release ---
+# (kept on disk locally; the app + tests use data/processed/ + the runs/ caches)
+data/raw/
+Data_Nature.zip
+
+# NOTE: the following ARE committed on purpose — the demo runs offline without them:
+#   data/processed/hourly_reference.csv        (sample input)
+#   data/fdes_static.json                      (carbon factors)
+#   runs/geometry/*.json                       (cached 3D massing + footprints)
+#   runs/demo/reference/*.json                 (pre-computed reference run for the live view)

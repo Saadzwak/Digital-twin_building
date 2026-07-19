@@ -1,0 +1,9 @@
+{
+  "m4_validation_route": "B",
+  "status": "HUMAN_GEOMETRY_VALIDATION_REQUIRED",
+  "fit_executed": false,
+  "reason": "No plan boundary/scale/north/height has been accepted by a human reviewer.",
+  "constraint_when_ready": "R_i = r'' / A_i; one shared r'' remains a free identified parameter across known surface areas.",
+  "identifiability_limit": "With shared outdoor forcing, individual facade losses are not independently identified.",
+  "geometry_review_source": "C:\\Users\\redaz\\Desktop\\OpenAI_hack\\runs\\m6\\geometry_review_request.json"
+}

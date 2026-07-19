@@ -1,0 +1,24 @@
+{
+  "protocol": "uniform_multistart_notebook_cell_55",
+  "config": {
+    "dt_seconds": 3600.0,
+    "n_starts": 32,
+    "rng": "numpy.random.PCG64",
+    "seed": 7096790
+  },
+  "random_start_distribution": "uniform in frozen log-space bounds (therefore log-uniform physical parameters)",
+  "first_start": "notebook initial R=0.2, C=1e7, alpha=1e-4",
+  "selection_rule": "minimum finite train MSE; deterministic start-id tie-break; success=False remains eligible when MSE is finite",
+  "validation_test_usage": "evaluated and journaled, never used to select an in-topology restart",
+  "topology_ranking": "validation BIC only among retained train-selected fits",
+  "strong_bic_gap_for_route_a": 10.0,
+  "near_best_train_definition": "MSE <= MSE_min * (1 + 0.0001)",
+  "source_csv": "C:\\Users\\redaz\\Desktop\\OpenAI_hack\\data\\processed\\hourly_reference.csv",
+  "source_csv_sha256": "9b70de93e0ced306cd6c189cb67ceda75b2bc4e4a472f610b3e58f090079acad",
+  "runtime": {
+    "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "numpy": "2.4.4",
+    "scipy": "1.17.1"
+  }
+}

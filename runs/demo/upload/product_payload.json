@@ -1,0 +1,535 @@
+{
+ "run_source": "upload-live-ac6d5fe9",
+ "generated_at_unix": 1784488655.720197,
+ "dataset": {
+  "kind": "upload",
+  "rows_raw": 8604,
+  "rows_hourly": 8604,
+  "columns_used": {
+   "time": "Date",
+   "tin": "Tin",
+   "tout": "Tout",
+   "power": "Qhvac_W_A"
+  },
+  "rows": 8604,
+  "first": "2021-01-01 00:00:00+00:00",
+  "last": "2021-12-31 22:00:00+00:00",
+  "missing_hours": 155,
+  "n_gaps": 2,
+  "largest_gap_hours": 93.0,
+  "splits": {
+   "train": 6453,
+   "validation": 1462,
+   "test": 689
+  }
+ },
+ "verdict_reference": {
+  "route": "B",
+  "statement": "Diagnostic reliability: acceptable, with caveats. The numerical calibration depends on its starting point; every range shown covers that variability. The full methodological detail is at the bottom of the page.",
+  "sealed_verdict_path": "runs/m4/verdict.json"
+ },
+ "selection": {
+  "headline_model": "LADDER_1R1C",
+  "twin_is_bank_selection": true,
+  "bank_auto_pick": {
+   "model": "LADDER_1R1C",
+   "val_rmse": 5.392114518232168,
+   "val_bic": 4948.620259201362,
+   "rule": "minimum training MSE per structure, then best validation information criterion among admissible structures"
+  },
+  "explainer": "The bench keeps the best admissible structure on your data: LADDER_1R1C. No published reference exists for this building; the physical-reading limits apply.",
+  "article_reference": null
+ },
+ "twin": {
+  "structure_label": "LADDER_1R1C",
+  "policy": "Operating twin: best admissible structure from the bench on your data. No published reference exists for this building; the physical-reading limits apply.",
+  "twin_source": "upload-bank-selection",
+  "consistent_with_selection": true,
+  "resistances": [
+   148.4131591025766
+  ],
+  "capacitances": [
+   1793898665.4740262
+  ],
+  "alpha": 0.29729131263745595,
+  "parameters_log": [
+   5.0,
+   21.307657113744646,
+   -1.2130427702679358
+  ],
+  "companion_vectors": 0,
+  "metrics": {
+   "validation_rmse": {
+    "value": 5.392114518232168,
+    "lower": 4.677154798672363,
+    "upper": 5.964622030521445,
+    "unit": "°C",
+    "period": "validation",
+    "method": "standard deviation of the residuals, 24 h block bootstrap, 300 replications"
+   },
+   "test_rmse": {
+    "value": 2.044724589010546,
+    "lower": 1.8744042466213886,
+    "upper": 2.2435801412070866,
+    "unit": "°C",
+    "period": "test",
+    "method": "standard deviation of the residuals, 24 h block bootstrap, 300 replications"
+   }
+  }
+ },
+ "indicators": {
+  "heat_loss": {
+   "value": 0.022664459782927904,
+   "lower": 0.022664459782927904,
+   "upper": 0.022664459782927904,
+   "unit": "W/°C",
+   "period": "measured year",
+   "method": "twin's effective outdoor conductances (single vector)",
+   "physically_readable": false,
+   "direct_path_share": 1.0,
+   "sentence": "Heat-loss level: not readable on this calibration. The automated calibration converged on a solution with no physical reading of the envelope; see the methodological detail.",
+   "robust_between_calibrations": false,
+   "spread_factor_between_calibrations": 1.0,
+   "robustness_note": ""
+  },
+  "response_time_hours": 152.0,
+  "reliability_text": "Diagnostic reliability: acceptable, with caveats. The numerical calibration depends on its starting point; every range shown covers that variability. The full methodological detail is at the bottom of the page.",
+  "cannot_distinguish_text": "What the model cannot distinguish: a single indoor temperature is measured, so individual walls, facades or glazing are not separable. The levels shown are whole-building properties."
+ },
+ "drift": {
+  "n_hours": 8604,
+  "structural_switch": {
+   "date": "2021-11-05",
+   "timestamp": "2021-11-05 00:00:00+00:00",
+   "onset_date": "2021-10-04",
+   "mean_residual_after_c": -10.42515996903332,
+   "offset_from_calibrated_c": -10.231269835296043,
+   "sign": "below",
+   "z_threshold": 3.0,
+   "persistence_days": 14,
+   "train_band_center_c": -0.19389013373727698,
+   "train_band_halfwidth_c": 7.012077983438774
+  },
+  "message": "The drift is visible from 2021-10-04; from 2021-11-05, the building stops behaving like the calibrated model: the measured temperature stays below the expected behaviour (-10.2 °C on average afterwards). The gap is structural, not noise.",
+  "principal_break": {
+   "timestamp": "2021-12-19 02:00:00+00:00",
+   "median_shift_c": -0.2317253854138066,
+   "robust_scale_c": 0.07079071415437106,
+   "evidence": "adjacent 24-sample local median shift exceeds 3.0×local MAD scale",
+   "in_training_period": false
+  },
+  "n_breaks_detected": 8,
+  "cumulative_final_c_h": -19712.488777209368,
+  "direction": "the building stays colder than the calibrated behaviour",
+  "split_bounds": {
+   "train_end": "2021-10-01 00:00:00+00:00",
+   "validation_end": "2021-12-01 00:00:00+00:00"
+  },
+  "residual_convention": "Tin_measured - Tin_estimated",
+  "note": "Open-loop simulation over the whole year; the gap is structural if it persists after the calibration period."
+ },
+ "scenarios": [
+  {
+   "key": "enveloppe_x1_5",
+   "title": "Reinforced envelope (+50% resistance)",
+   "description": "All resistances to the outdoors multiplied by 1.5.",
+   "applicable": true,
+   "reason_if_not": "",
+   "delta_tin_mean_c": 0.00019593215369451676,
+   "delta_tin_winter_c": 0.00017966688001814243,
+   "daily_swing_damping_pct": -0.0031088219987651655,
+   "delta_energy_kwh": -0.7263316392527486,
+   "delta_energy_pct": -0.0031581845113631585,
+   "negative_power_fraction": 0.0,
+   "negligible_temperature": true,
+   "negligible_energy": true,
+   "dispersion": {
+    "delta_energy_pct": {
+     "median": -0.0031581845113631585,
+     "q05": -0.0031581845113631585,
+     "q95": -0.0031581845113631585,
+     "n_vectors": 1
+    },
+    "delta_tin_mean_c": {
+     "median": 0.00019593215369451676,
+     "q05": 0.00019593215369451676,
+     "q95": 0.00019593215369451676,
+     "n_vectors": 1
+    },
+    "interpretation": "empirical range across starts, not a statistical confidence interval"
+   },
+   "note": ""
+  },
+  {
+   "key": "enveloppe_x2",
+   "title": "Strongly reinforced envelope (resistance doubled)",
+   "description": "All resistances to the outdoors multiplied by 2.",
+   "applicable": true,
+   "reason_if_not": "",
+   "delta_tin_mean_c": 0.0002939002456832789,
+   "delta_tin_winter_c": 0.0002695023016440483,
+   "daily_swing_damping_pct": -0.0046632743697205825,
+   "delta_energy_kwh": -1.0894974789698608,
+   "delta_energy_pct": -0.004737276854401881,
+   "negative_power_fraction": 0.0,
+   "negligible_temperature": true,
+   "negligible_energy": true,
+   "dispersion": {
+    "delta_energy_pct": {
+     "median": -0.004737276854401881,
+     "q05": -0.004737276854401881,
+     "q95": -0.004737276854401881,
+     "n_vectors": 1
+    },
+    "delta_tin_mean_c": {
+     "median": 0.0002939002456832789,
+     "q05": 0.0002939002456832789,
+     "q95": 0.0002939002456832789,
+     "n_vectors": 1
+    },
+    "interpretation": "empirical range across starts, not a statistical confidence interval"
+   },
+   "note": ""
+  },
+  {
+   "key": "fuites_directes_x2",
+   "title": "Direct losses halved",
+   "description": "The resistance of the direct indoor-to-outdoor path is doubled (infiltration, uncontrolled ventilation).",
+   "applicable": false,
+   "reason_if_not": "On the selected structure, the direct path is the only path to the outdoors: this scenario would be identical to the envelope scenario.",
+   "delta_tin_mean_c": null,
+   "delta_tin_winter_c": null,
+   "daily_swing_damping_pct": null,
+   "delta_energy_kwh": null,
+   "delta_energy_pct": null,
+   "negative_power_fraction": null,
+   "negligible_temperature": false,
+   "negligible_energy": false,
+   "dispersion": {
+    "delta_energy_pct": null,
+    "delta_tin_mean_c": null,
+    "interpretation": "empirical range across starts, not a statistical confidence interval"
+   },
+   "note": ""
+  },
+  {
+   "key": "inertie_x1_5",
+   "title": "Reinforced thermal mass (+50%)",
+   "description": "All thermal capacities multiplied by 1.5.",
+   "applicable": false,
+   "reason_if_not": "The identified effective thermal mass has no physical reading on this calibration (time constant ≈ 73,955,047 h, beyond one year): the simulated effect of a thermal-mass change would not be interpretable.",
+   "delta_tin_mean_c": null,
+   "delta_tin_winter_c": null,
+   "daily_swing_damping_pct": null,
+   "delta_energy_kwh": null,
+   "delta_energy_pct": null,
+   "negative_power_fraction": null,
+   "negligible_temperature": false,
+   "negligible_energy": false,
+   "dispersion": {
+    "delta_energy_pct": null,
+    "delta_tin_mean_c": null,
+    "interpretation": "empirical range across starts, not a statistical confidence interval"
+   },
+   "note": ""
+  }
+ ],
+ "bank": {
+  "n_starts": 3,
+  "rows": [
+   {
+    "model": "LADDER_1R1C",
+    "n_parameters": 3,
+    "duplicate_of": null,
+    "selected_start": 1,
+    "train_mse": 3.2581217673859926,
+    "success": true,
+    "val_rmse": 5.392114518232168,
+    "val_bic": 4948.620259201362,
+    "test_rmse": 2.044724589010546,
+    "elapsed_s": 0.87,
+    "admissible": true,
+    "excluded_reason": ""
+   },
+   {
+    "model": "LADDER_2R2C",
+    "n_parameters": 5,
+    "duplicate_of": null,
+    "selected_start": 1,
+    "train_mse": 3.2581714150259797,
+    "success": true,
+    "val_rmse": 5.392062531793931,
+    "val_bic": 4963.167189486099,
+    "test_rmse": 2.044767944451159,
+    "elapsed_s": 2.96,
+    "admissible": true,
+    "excluded_reason": ""
+   },
+   {
+    "model": "LADDER_3R3C",
+    "n_parameters": 7,
+    "duplicate_of": null,
+    "selected_start": 1,
+    "train_mse": 3.2585717706194997,
+    "success": true,
+    "val_rmse": 5.392270107095573,
+    "val_bic": 4977.854872239441,
+    "test_rmse": 2.0447950469821925,
+    "elapsed_s": 4.26,
+    "admissible": true,
+    "excluded_reason": ""
+   },
+   {
+    "model": "LADDER_4R4C",
+    "n_parameters": 9,
+    "duplicate_of": null,
+    "selected_start": 3,
+    "train_mse": 3.2584249220386527,
+    "success": true,
+    "val_rmse": 5.3922703970695895,
+    "val_bic": 4992.4301507607,
+    "test_rmse": 2.0447927245088136,
+    "elapsed_s": 1.58,
+    "admissible": true,
+    "excluded_reason": ""
+   },
+   {
+    "model": "LADDER_5R5C",
+    "n_parameters": 11,
+    "duplicate_of": null,
+    "selected_start": 1,
+    "train_mse": 4.488326881777999,
+    "success": true,
+    "val_rmse": 5.961403753383578,
+    "val_bic": 5300.397859685806,
+    "test_rmse": 2.97797504845996,
+    "elapsed_s": 4.64,
+    "admissible": true,
+    "excluded_reason": ""
+   },
+   {
+    "model": "LADDER_6R6C",
+    "n_parameters": 13,
+    "duplicate_of": null,
+    "selected_start": 3,
+    "train_mse": 3.2629936397570476,
+    "success": true,
+    "val_rmse": 5.393123942907814,
+    "val_bic": 5022.043198474445,
+    "test_rmse": 2.0458143269198508,
+    "elapsed_s": 6.42,
+    "admissible": true,
+    "excluded_reason": ""
+   },
+   {
+    "model": "LADDER_7R7C",
+    "n_parameters": 15,
+    "duplicate_of": null,
+    "selected_start": 1,
+    "train_mse": 3.2590723344694497,
+    "success": true,
+    "val_rmse": 5.39233989285953,
+    "val_bic": 5036.1931989850855,
+    "test_rmse": 2.0448809063920494,
+    "elapsed_s": 10.47,
+    "admissible": true,
+    "excluded_reason": ""
+   },
+   {
+    "model": "LADDER_8R8C",
+    "n_parameters": 17,
+    "duplicate_of": null,
+    "selected_start": 1,
+    "train_mse": 3.258308565101214,
+    "success": true,
+    "val_rmse": 5.3914481852292715,
+    "val_bic": 5050.284751208535,
+    "test_rmse": 2.0438851859024334,
+    "elapsed_s": 13.35,
+    "admissible": true,
+    "excluded_reason": ""
+   },
+   {
+    "model": "LADDER_9R9C",
+    "n_parameters": 19,
+    "duplicate_of": null,
+    "selected_start": 1,
+    "train_mse": 3.258818841484754,
+    "success": true,
+    "val_rmse": 5.392760991745406,
+    "val_bic": 5065.571773790241,
+    "test_rmse": 2.0453393790149774,
+    "elapsed_s": 14.82,
+    "admissible": true,
+    "excluded_reason": ""
+   },
+   {
+    "model": "LADDER_10R10C",
+    "n_parameters": 21,
+    "duplicate_of": null,
+    "selected_start": 1,
+    "train_mse": 3.263992519888493,
+    "success": true,
+    "val_rmse": 5.395849373288759,
+    "val_bic": 5081.820961994013,
+    "test_rmse": 2.0488213155013058,
+    "elapsed_s": 12.01,
+    "admissible": true,
+    "excluded_reason": ""
+   },
+   {
+    "model": "STD_1R1C",
+    "n_parameters": 3,
+    "duplicate_of": "LADDER_1R1C",
+    "selected_start": 1,
+    "train_mse": 3.2581217673859926,
+    "success": true,
+    "val_rmse": 5.392114518232168,
+    "val_bic": 4948.620259201362,
+    "test_rmse": 2.044724589010546,
+    "elapsed_s": 0.71,
+    "admissible": true,
+    "excluded_reason": ""
+   },
+   {
+    "model": "STD_2R1C_parallel_losses",
+    "n_parameters": 4,
+    "duplicate_of": null,
+    "selected_start": 1,
+    "train_mse": 3.258087979550255,
+    "success": true,
+    "val_rmse": 5.392044288623423,
+    "val_bic": 4955.869735948501,
+    "test_rmse": 2.0445734799454938,
+    "elapsed_s": 1.47,
+    "admissible": true,
+    "excluded_reason": ""
+   },
+   {
+    "model": "STD_2R2C_air_mass",
+    "n_parameters": 5,
+    "duplicate_of": "LADDER_2R2C",
+    "selected_start": 1,
+    "train_mse": 3.2581714150259797,
+    "success": true,
+    "val_rmse": 5.392062531793931,
+    "val_bic": 4963.167189486099,
+    "test_rmse": 2.044767944451159,
+    "elapsed_s": 2.91,
+    "admissible": true,
+    "excluded_reason": ""
+   },
+   {
+    "model": "STD_3R2C_air_shunt",
+    "n_parameters": 6,
+    "duplicate_of": null,
+    "selected_start": 1,
+    "train_mse": 3.2646030374452133,
+    "success": true,
+    "val_rmse": 5.391481138408551,
+    "val_bic": 4970.139455949933,
+    "test_rmse": 2.0457769532109187,
+    "elapsed_s": 1.78,
+    "admissible": true,
+    "excluded_reason": ""
+   },
+   {
+    "model": "STD_3R3C_two_masses_series",
+    "n_parameters": 7,
+    "duplicate_of": "LADDER_3R3C",
+    "selected_start": 1,
+    "train_mse": 3.2585717706194997,
+    "success": true,
+    "val_rmse": 5.392270107095573,
+    "val_bic": 4977.854872239441,
+    "test_rmse": 2.0447950469821925,
+    "elapsed_s": 4.1,
+    "admissible": true,
+    "excluded_reason": ""
+   },
+   {
+    "model": "STD_4R3C_two_masses_plus_air_shunt",
+    "n_parameters": 8,
+    "duplicate_of": null,
+    "selected_start": 1,
+    "train_mse": 3.2596986983097747,
+    "success": true,
+    "val_rmse": 5.391847897889519,
+    "val_bic": 4984.913477722071,
+    "test_rmse": 2.0458321997408686,
+    "elapsed_s": 5.57,
+    "admissible": true,
+    "excluded_reason": ""
+   },
+   {
+    "model": "STD_5R3C_air_shunt_mid_shunt",
+    "n_parameters": 9,
+    "duplicate_of": null,
+    "selected_start": 1,
+    "train_mse": 3.2602040353854003,
+    "success": true,
+    "val_rmse": 5.391322591547185,
+    "val_bic": 4991.916150768754,
+    "test_rmse": 2.0453859469700855,
+    "elapsed_s": 7.02,
+    "admissible": true,
+    "excluded_reason": ""
+   },
+   {
+    "model": "STD_6R4C_three_masses_plus_shunts",
+    "n_parameters": 11,
+    "duplicate_of": null,
+    "selected_start": 3,
+    "train_mse": 3.2598127576291156,
+    "success": true,
+    "val_rmse": 5.391703681697643,
+    "val_bic": 5006.697950132532,
+    "test_rmse": 2.045108115452516,
+    "elapsed_s": 6.41,
+    "admissible": true,
+    "excluded_reason": ""
+   },
+   {
+    "model": "STD_7R5C_four_masses_plus_shunts",
+    "n_parameters": 13,
+    "duplicate_of": null,
+    "selected_start": 1,
+    "train_mse": 3.2587161019089548,
+    "success": true,
+    "val_rmse": 5.390756387878271,
+    "val_bic": 5020.7592949433865,
+    "test_rmse": 2.044432158845133,
+    "elapsed_s": 6.14,
+    "admissible": true,
+    "excluded_reason": ""
+   }
+  ],
+  "excluded": [],
+  "selected_model": "LADDER_1R1C",
+  "article_reference": null,
+  "admissibility_threshold_mse": 6.5174322038179096
+ },
+ "onboarding_questions": [
+  {
+   "key": "thermal_boundary",
+   "prompt": "Which polygon and which floors match the metered thermal perimeter?",
+   "why_needed": "The plans alone do not link their geometry to the metered indoor-temperature zone."
+  },
+  {
+   "key": "north_azimuth",
+   "prompt": "What is the north azimuth on the plan?",
+   "why_needed": "Orientation cannot be reliably inferred from the supplied PDFs."
+  },
+  {
+   "key": "floor_heights",
+   "prompt": "Which finished floor-to-floor heights should be used per level of the thermal perimeter?",
+   "why_needed": "Volume and facade areas require confirmed heights."
+  },
+  {
+   "key": "glazing_geometry",
+   "prompt": "Do you confirm the drawn glazing and its height, or declare them unknown?",
+   "why_needed": "The glazing ratio cannot be inferred from unvalidated PDF outlines."
+  }
+ ],
+ "geometry_status": "HUMAN_VALIDATION_REQUIRED"
+}

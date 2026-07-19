@@ -1,0 +1,27 @@
+{
+  "protocol": "notebook_cell_55_reference",
+  "source_layout": "Data_Nature/data",
+  "resolved_source_directory": "data\\raw\\Data_Nature\\data",
+  "archive_sha256": "6296cf25af1df0f5c416d1c4e6c31c979a9967e16051cf353c73df64a8f36416",
+  "known_archive_sha256": "6296cf25af1df0f5c416d1c4e6c31c979a9967e16051cf353c73df64a8f36416",
+  "block": "A",
+  "meter_id": "335546926",
+  "sensor_count": 49,
+  "selected_sensor_observations": 2115936,
+  "unique_tin_timestamps": 847227,
+  "energy_interval_seconds": 599.016,
+  "q_clip_lower_w": 234.76000641051326,
+  "q_clip_upper_w": 14527.371764694082,
+  "hourly_rows": 8604,
+  "range_utc": [
+    "2021-01-01 00:00:00+00:00",
+    "2021-12-31 22:00:00+00:00"
+  ],
+  "split_rows": {
+    "train": 6460,
+    "validation": 1464,
+    "test": 680
+  },
+  "residual_convention": "Tin_measured - Tin_estimated",
+  "pandas_frequency_adaptation": "1h replaces notebook literal 1H; pandas 3 rejects uppercase H and semantics are identical."
+}

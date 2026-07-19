@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "validation_rmse": 4.682382239968712,
+  "validation_bic": 4578.578335283145,
+  "test_rmse": 0.8575992138865025,
+  "tolerance": {
+    "rmse": 5e-07,
+    "bic": 3e-06
+  },
+  "purpose": "post-fit regression oracle only; never a multi-start initialization or selection input"
+}

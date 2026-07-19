@@ -1,0 +1,120 @@
+{
+  "run_source": "m4-multistart-a9ba009bce9e3659",
+  "topology_label": "LADDER_1R1C",
+  "m4_validation_route": "B",
+  "initialization_caveat": "Identification sensible à l’initialisation : interprétez les plages inter-départs comme une dispersion empirique, non comme un intervalle de confiance statistique.",
+  "responses": {
+    "model_status": {
+      "text": "Voici l’état d’identification de la structure retenue LADDER_1R1C. Identification sensible à l’initialisation : interprétez les plages inter-départs comme une dispersion empirique, non comme un intervalle de confiance statistique.",
+      "estimates": [
+        {
+          "value": 5.006915792201093,
+          "lower": 4.334309701890687,
+          "upper": 5.673638959018558,
+          "unit": "°C",
+          "period": "validation (1464 h)",
+          "method": "RMSE des résidus, bootstrap par blocs 24 h / 300 réplications",
+          "run_source": "m4-multistart-a9ba009bce9e3659"
+        },
+        {
+          "value": 4738.34808036522,
+          "lower": 4266.755676111827,
+          "upper": 6583.718177801319,
+          "unit": "BIC",
+          "period": "validation (1464 h)",
+          "method": "BIC du départ retenu par MSE train; empirical q05–q95 expanded to include the train-selected start",
+          "run_source": "m4-multistart-a9ba009bce9e3659"
+        }
+      ],
+      "scope_note": "Les états et branches RC sont effectifs : aucune capacité ni perte par paroi indépendante n’est identifiée."
+    },
+    "topology": {
+      "text": "La structure RC effectivement retenue par le classement BIC de validation est LADDER_1R1C. Identification sensible à l’initialisation : interprétez les plages inter-départs comme une dispersion empirique, non comme un intervalle de confiance statistique.",
+      "estimates": [
+        {
+          "value": 5.006915792201093,
+          "lower": 4.334309701890687,
+          "upper": 5.673638959018558,
+          "unit": "°C",
+          "period": "validation (1464 h)",
+          "method": "RMSE des résidus, bootstrap par blocs 24 h / 300 réplications",
+          "run_source": "m4-multistart-a9ba009bce9e3659"
+        },
+        {
+          "value": 4738.34808036522,
+          "lower": 4266.755676111827,
+          "upper": 6583.718177801319,
+          "unit": "BIC",
+          "period": "validation (1464 h)",
+          "method": "BIC du départ retenu par MSE train; empirical q05–q95 expanded to include the train-selected start",
+          "run_source": "m4-multistart-a9ba009bce9e3659"
+        }
+      ],
+      "scope_note": "Les états et branches RC sont effectifs : aucune capacité ni perte par paroi indépendante n’est identifiée."
+    },
+    "metrics": {
+      "text": "Voici les métriques sourcées de la structure retenue LADDER_1R1C. Identification sensible à l’initialisation : interprétez les plages inter-départs comme une dispersion empirique, non comme un intervalle de confiance statistique.",
+      "estimates": [
+        {
+          "value": 5.006915792201093,
+          "lower": 4.334309701890687,
+          "upper": 5.673638959018558,
+          "unit": "°C",
+          "period": "validation (1464 h)",
+          "method": "RMSE des résidus, bootstrap par blocs 24 h / 300 réplications",
+          "run_source": "m4-multistart-a9ba009bce9e3659"
+        },
+        {
+          "value": 4738.34808036522,
+          "lower": 4266.755676111827,
+          "upper": 6583.718177801319,
+          "unit": "BIC",
+          "period": "validation (1464 h)",
+          "method": "BIC du départ retenu par MSE train; empirical q05–q95 expanded to include the train-selected start",
+          "run_source": "m4-multistart-a9ba009bce9e3659"
+        }
+      ],
+      "scope_note": "Le départ est choisi par MSE train; la validation sert au classement entre topologies."
+    },
+    "residual_episode": {
+      "text": "Voici les éléments de dérive ou, en leur absence, la métrique résiduelle disponible. Identification sensible à l’initialisation : interprétez les plages inter-départs comme une dispersion empirique, non comme un intervalle de confiance statistique.",
+      "estimates": [
+        {
+          "value": -0.23170646225917935,
+          "lower": -0.30248572438558063,
+          "upper": -0.16092720013277806,
+          "unit": "°C de résidu",
+          "period": "test, 2021-12-19T02:00:00+00:00",
+          "method": "rupture locale 24 h; enveloppe ±MAD locale (échelle diagnostique, pas IC)",
+          "run_source": "m4-multistart-a9ba009bce9e3659"
+        }
+      ],
+      "scope_note": "Les ruptures sont des signaux diagnostiques, pas des causes attribuées."
+    },
+    "scenario": {
+      "text": "Voici les scénarios thermiques conditionnels calculés à partir des paramètres identifiés. Identification sensible à l’initialisation : interprétez les plages inter-départs comme une dispersion empirique, non comme un intervalle de confiance statistique.",
+      "estimates": [
+        {
+          "value": 0.0763939511987796,
+          "lower": 2.725361327550127e-11,
+          "upper": 0.07641880791802955,
+          "unit": "°C de Tin moyen",
+          "period": "test (680 h), conditionnel aux entrées observées",
+          "method": "contre-factuel RC : +10 % du signal Q HVAC; pas une économie ni une causalité d’intervention; empirical q05–q95 expanded to include the train-selected start",
+          "run_source": "m4-multistart-a9ba009bce9e3659"
+        },
+        {
+          "value": 2.090077641654276e-07,
+          "lower": 1.1453731937248743e-07,
+          "upper": 0.7890426679755231,
+          "unit": "°C de Tin moyen",
+          "period": "test (680 h), conditionnel aux entrées observées",
+          "method": "contre-factuel RC : +1 °C du forçage extérieur; pas une économie ni une causalité d’intervention; empirical q05–q95 expanded to include the train-selected start",
+          "run_source": "m4-multistart-a9ba009bce9e3659"
+        }
+      ],
+      "scope_note": "Ce ne sont ni des économies, ni une recommandation d’intervention physique."
+    }
+  },
+  "scope": "Only dashboard IntervalEstimate cards from sealed M4/M5/M9 artifacts are eligible."
+}

@@ -1,0 +1,28 @@
+{
+  "protocol": "notebook_cell_55_reference",
+  "executed": true,
+  "validated": false,
+  "residual_convention": "Tin_measured - Tin_estimated",
+  "primary_criteria": {
+    "expected_model_labels": 19,
+    "observed_model_labels": 19,
+    "other_structures_in_validation_rmse_interval_4_98_5_02": 15,
+    "expected_other_structures_in_interval": 18,
+    "std_4r3c": {
+      "observed_validation_rmse": 5.007034573212,
+      "expected_validation_rmse": 4.682382,
+      "observed_validation_bic": 4774.862180096648,
+      "expected_validation_bic": 4578.578337,
+      "observed_test_rmse": 0.849648062482,
+      "expected_test_rmse": 0.857599
+    }
+  },
+  "conclusion": "FAILED_REPRODUCTION_DO_NOT_USE_FOR_PRODUCT_CLAIMS",
+  "fit_status_rule": "Metrics are retained even when res.success is false; current local runs were all success=true.",
+  "duplicates_retained": [
+    {"model": "STD_1R1C", "duplicate_of": "LADDER_1R1C"},
+    {"model": "STD_2R2C_air_mass", "duplicate_of": "LADDER_2R2C"},
+    {"model": "STD_3R3C_two_masses_series", "duplicate_of": "LADDER_3R3C"}
+  ],
+  "parameter_artifact_note": "The failed local 4R3C vector was not re-run solely for extraction, to avoid a retry after the failure criterion."
+}

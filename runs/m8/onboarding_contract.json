@@ -1,0 +1,54 @@
+{
+  "state": {
+    "thermal_boundary": "not_asked",
+    "north_azimuth": "not_asked",
+    "floor_heights": "not_asked",
+    "glazing_geometry": "not_asked"
+  },
+  "questions": [
+    {
+      "key": "thermal_boundary",
+      "prompt": "Quel polygone et quels niveaux correspondent au périmètre thermique mesuré par Tin bloc A ?",
+      "why_needed": "Les plans seuls ne relient pas leur géométrie à la moyenne de capteurs du bloc A.",
+      "enables": [
+        "thermal_boundary"
+      ]
+    },
+    {
+      "key": "north_azimuth",
+      "prompt": "Quel est l’azimut du nord sur le plan ?",
+      "why_needed": "L’orientation ne peut pas être déduite de façon fiable des PDFs fournis.",
+      "enables": [
+        "facade_orientation"
+      ]
+    },
+    {
+      "key": "floor_heights",
+      "prompt": "Quelles hauteurs finies faut-il retenir par niveau du périmètre thermique ?",
+      "why_needed": "Le volume et les surfaces de façade nécessitent des hauteurs confirmées.",
+      "enables": [
+        "volume",
+        "facade_area"
+      ]
+    },
+    {
+      "key": "glazing_geometry",
+      "prompt": "Validez-vous les vitrages tracés et leur hauteur, ou les déclarez-vous inconnus ?",
+      "why_needed": "Le ratio vitrage ne peut pas être inféré de contours PDF non validés.",
+      "enables": [
+        "glazing_ratio"
+      ]
+    }
+  ],
+  "capabilities": {
+    "thermal_boundary": false,
+    "facade_orientation": false,
+    "facade_area": false,
+    "volume": false,
+    "glazing_ratio": false,
+    "geometry_constrained_candidate": false
+  },
+  "maximum_questions": 5,
+  "parameter_policy": "M7 retains one shared r'' free parameter; no user-supplied resistance is requested.",
+  "unknown_policy": "An unknown answer disables dependent calculation; no default is invented."
+}

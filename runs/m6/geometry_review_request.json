@@ -1,0 +1,131 @@
+{
+  "status": "HUMAN_VALIDATION_REQUIRED",
+  "metrics_are_null_until_review": [
+    "footprint_area_m2",
+    "facade_surface_by_orientation_m2",
+    "volume_m3",
+    "glazing_ratio"
+  ],
+  "plans": [
+    {
+      "filename": "Edificio PLEIADES (planta baja).pdf",
+      "level": "baja",
+      "page_count": 1,
+      "width_points": 1191.0,
+      "height_points": 842.0,
+      "rotation_degrees": 0,
+      "text_characters": 115,
+      "vector_drawing_count": 12939,
+      "detected_scale": "1:250",
+      "preview_path": "C:\\Users\\redaz\\Desktop\\OpenAI_hack\\tmp\\m6_previews\\Edificio PLEIADES (planta baja).png",
+      "accepted_by_human": false,
+      "required_confirmations": [
+        "thermal boundary",
+        "scale",
+        "north",
+        "height",
+        "glazing when applicable"
+      ]
+    },
+    {
+      "filename": "Edificio PLEIADES (planta 1ª).pdf",
+      "level": "1",
+      "page_count": 1,
+      "width_points": 1191.0,
+      "height_points": 842.0,
+      "rotation_degrees": 0,
+      "text_characters": 118,
+      "vector_drawing_count": 8048,
+      "detected_scale": "1:250",
+      "preview_path": "C:\\Users\\redaz\\Desktop\\OpenAI_hack\\tmp\\m6_previews\\Edificio PLEIADES (planta 1a).png",
+      "accepted_by_human": false,
+      "required_confirmations": [
+        "thermal boundary",
+        "scale",
+        "north",
+        "height",
+        "glazing when applicable"
+      ]
+    },
+    {
+      "filename": "Edificio PLEIADES (planta 2ª).pdf",
+      "level": "2",
+      "page_count": 1,
+      "width_points": 1191.0,
+      "height_points": 842.0,
+      "rotation_degrees": 0,
+      "text_characters": 118,
+      "vector_drawing_count": 4172,
+      "detected_scale": "1:250",
+      "preview_path": "C:\\Users\\redaz\\Desktop\\OpenAI_hack\\tmp\\m6_previews\\Edificio PLEIADES (planta 2a).png",
+      "accepted_by_human": false,
+      "required_confirmations": [
+        "thermal boundary",
+        "scale",
+        "north",
+        "height",
+        "glazing when applicable"
+      ]
+    },
+    {
+      "filename": "Edificio PLEIADES (planta 3ª).pdf",
+      "level": "3",
+      "page_count": 1,
+      "width_points": 1191.0,
+      "height_points": 842.0,
+      "rotation_degrees": 0,
+      "text_characters": 118,
+      "vector_drawing_count": 2439,
+      "detected_scale": "1:250",
+      "preview_path": "C:\\Users\\redaz\\Desktop\\OpenAI_hack\\tmp\\m6_previews\\Edificio PLEIADES (planta 3a).png",
+      "accepted_by_human": false,
+      "required_confirmations": [
+        "thermal boundary",
+        "scale",
+        "north",
+        "height",
+        "glazing when applicable"
+      ]
+    },
+    {
+      "filename": "Edificio PLEIADES (planta 4ª).pdf",
+      "level": "4",
+      "page_count": 1,
+      "width_points": 1191.0,
+      "height_points": 842.0,
+      "rotation_degrees": 90,
+      "text_characters": 0,
+      "vector_drawing_count": 1539,
+      "detected_scale": null,
+      "preview_path": "C:\\Users\\redaz\\Desktop\\OpenAI_hack\\tmp\\m6_previews\\Edificio PLEIADES (planta 4a).png",
+      "accepted_by_human": false,
+      "required_confirmations": [
+        "thermal boundary",
+        "scale",
+        "north",
+        "height",
+        "glazing when applicable"
+      ]
+    },
+    {
+      "filename": "Edificio PLEIADES (planta 5ª).pdf",
+      "level": "5",
+      "page_count": 1,
+      "width_points": 1191.0,
+      "height_points": 842.0,
+      "rotation_degrees": 90,
+      "text_characters": 0,
+      "vector_drawing_count": 524,
+      "detected_scale": null,
+      "preview_path": "C:\\Users\\redaz\\Desktop\\OpenAI_hack\\tmp\\m6_previews\\Edificio PLEIADES (planta 5a).png",
+      "accepted_by_human": false,
+      "required_confirmations": [
+        "thermal boundary",
+        "scale",
+        "north",
+        "height",
+        "glazing when applicable"
+      ]
+    }
+  ]
+}

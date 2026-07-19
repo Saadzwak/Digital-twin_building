@@ -1,0 +1,283 @@
+{
+  "run_source": "m4-multistart-a9ba009bce9e3659",
+  "m4_validation_route": "B",
+  "topology_label": "LADDER_1R1C",
+  "topology_index": 0,
+  "selected_start_id": 29,
+  "selected_fit_status": {
+    "success": true,
+    "status": 0,
+    "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+  },
+  "residual_convention": "Tin_measured - Tin_estimated",
+  "method": {
+    "break_detector": "24-hour adjacent local median shift, 3× local MAD, 24-hour separation",
+    "bootstrap": "deterministic 300-replicate moving-block bootstrap, block 24 hours, 95% interval within longest gap-free segment",
+    "recalibration": "train-only residual median by train Tout tercile; evaluated separately afterwards"
+  },
+  "temperature_regime_train_thresholds_c": {
+    "lower": 15.97627599404762,
+    "upper": 23.677721567567566
+  },
+  "train_regime_bias_c": {
+    "cold": -1.9697722199045593,
+    "mid": -0.2935603234756208,
+    "warm": 1.4929627082356873
+  },
+  "metrics": {
+    "train": {
+      "n_samples": 6460,
+      "residual_mean_c": {
+        "estimate": -0.5338259240051406,
+        "lower": -0.7743239139767368,
+        "upper": -0.31237345609978456,
+        "confidence": 0.95,
+        "replicates": 300,
+        "block_size": 24
+      },
+      "residual_rmse_c": {
+        "estimate": 1.8417423046956072,
+        "lower": 1.7213947578798305,
+        "upper": 1.9494198947598134,
+        "confidence": 0.95,
+        "replicates": 300,
+        "block_size": 24
+      },
+      "residual_median_c": -0.43180814059008554,
+      "residual_mad_c": 1.5956480816598102,
+      "lag1_autocorrelation": 0.9962429253662711,
+      "contiguous_segment_n": 5355,
+      "metric_segment_policy": "Bootstrap interval statistics use only the longest contiguous observed sequence; n_samples remains the full split count and contiguous_segment_n is the exact statistic sample count."
+    },
+    "validation": {
+      "n_samples": 1464,
+      "residual_mean_c": {
+        "estimate": -4.296507600944697,
+        "lower": -4.933306993268831,
+        "upper": -3.696971783055357,
+        "confidence": 0.95,
+        "replicates": 300,
+        "block_size": 24
+      },
+      "residual_rmse_c": {
+        "estimate": 5.006915792201093,
+        "lower": 4.334309701890687,
+        "upper": 5.673638959018558,
+        "confidence": 0.95,
+        "replicates": 300,
+        "block_size": 24
+      },
+      "residual_median_c": -3.835771853702383,
+      "residual_mad_c": 2.010161214109811,
+      "lag1_autocorrelation": 0.9983644698292904,
+      "contiguous_segment_n": 1464,
+      "metric_segment_policy": "Bootstrap interval statistics use only the longest contiguous observed sequence; n_samples remains the full split count and contiguous_segment_n is the exact statistic sample count."
+    },
+    "test": {
+      "n_samples": 680,
+      "residual_mean_c": {
+        "estimate": -0.6658609845650749,
+        "lower": -0.9481233037907525,
+        "upper": -0.4622689468538549,
+        "confidence": 0.95,
+        "replicates": 300,
+        "block_size": 24
+      },
+      "residual_rmse_c": {
+        "estimate": 0.9687265231477253,
+        "lower": 0.8042855544325349,
+        "upper": 1.137146728948662,
+        "confidence": 0.95,
+        "replicates": 300,
+        "block_size": 24
+      },
+      "residual_median_c": -0.7511632640846067,
+      "residual_mad_c": 0.5046140288965848,
+      "lag1_autocorrelation": 0.9758126452529797,
+      "contiguous_segment_n": 448,
+      "metric_segment_policy": "Bootstrap interval statistics use only the longest contiguous observed sequence; n_samples remains the full split count and contiguous_segment_n is the exact statistic sample count."
+    }
+  },
+  "recalibrated_metrics": {
+    "train": {
+      "rmse_c": {
+        "estimate": 1.2999499495807982,
+        "lower": 1.235558015386158,
+        "upper": 1.3623930646745124,
+        "confidence": 0.95,
+        "replicates": 300,
+        "block_size": 24
+      },
+      "contiguous_segment_n": 5355,
+      "bias_model": "median residual by train-only Tout tercile"
+    },
+    "validation": {
+      "rmse_c": {
+        "estimate": 3.998003799318552,
+        "lower": 3.494725466303614,
+        "upper": 4.5114299636800705,
+        "confidence": 0.95,
+        "replicates": 300,
+        "block_size": 24
+      },
+      "contiguous_segment_n": 1464,
+      "bias_model": "median residual by train-only Tout tercile"
+    },
+    "test": {
+      "rmse_c": {
+        "estimate": 1.4454522557465919,
+        "lower": 1.1963475085597004,
+        "upper": 1.6280440031795824,
+        "confidence": 0.95,
+        "replicates": 300,
+        "block_size": 24
+      },
+      "contiguous_segment_n": 448,
+      "bias_model": "median residual by train-only Tout tercile"
+    }
+  },
+  "classifications": {
+    "train": {
+      "label": "unclassified",
+      "signed_median_c": -0.25973103023378386,
+      "mad_c": 1.5646400188836775,
+      "lag1_autocorrelation": 0.9964930551860924,
+      "rationale": "pattern is neither a clear persistent bias nor weakly correlated noise"
+    },
+    "validation": {
+      "label": "persistent_bias",
+      "signed_median_c": -3.835771853702383,
+      "mad_c": 2.010161214109811,
+      "lag1_autocorrelation": 0.9983644698292904,
+      "rationale": "signed median exceeds robust spread and retains one sign for at least 70% of samples"
+    },
+    "test": {
+      "label": "unclassified",
+      "signed_median_c": -0.46159854441150294,
+      "mad_c": 0.47921967105264685,
+      "lag1_autocorrelation": 0.9706708098533889,
+      "rationale": "pattern is neither a clear persistent bias nor weakly correlated noise"
+    }
+  },
+  "regime_breaks": {
+    "train": [
+      {
+        "timestamp": "2021-01-07T22:00:00+00:00",
+        "segment_id": 0,
+        "median_shift_c": -0.7652777379451567,
+        "robust_scale_c": 0.2458814940139651,
+        "evidence": "adjacent 24-sample local median shift exceeds 3.0×local MAD scale",
+        "uncertainty_note": "robust local MAD scale; not a statistical confidence interval"
+      },
+      {
+        "timestamp": "2021-01-09T23:00:00+00:00",
+        "segment_id": 0,
+        "median_shift_c": -0.39585476443791023,
+        "robust_scale_c": 0.12833992626237645,
+        "evidence": "adjacent 24-sample local median shift exceeds 3.0×local MAD scale",
+        "uncertainty_note": "robust local MAD scale; not a statistical confidence interval"
+      },
+      {
+        "timestamp": "2021-02-09T04:00:00+00:00",
+        "segment_id": 0,
+        "median_shift_c": -0.4486294033136815,
+        "robust_scale_c": 0.1376731530320843,
+        "evidence": "adjacent 24-sample local median shift exceeds 3.0×local MAD scale",
+        "uncertainty_note": "robust local MAD scale; not a statistical confidence interval"
+      },
+      {
+        "timestamp": "2021-03-18T20:00:00+00:00",
+        "segment_id": 0,
+        "median_shift_c": -0.6956558662198891,
+        "robust_scale_c": 0.21264355121823494,
+        "evidence": "adjacent 24-sample local median shift exceeds 3.0×local MAD scale",
+        "uncertainty_note": "robust local MAD scale; not a statistical confidence interval"
+      },
+      {
+        "timestamp": "2021-04-07T21:00:00+00:00",
+        "segment_id": 0,
+        "median_shift_c": -0.5293940299409137,
+        "robust_scale_c": 0.17269012109993626,
+        "evidence": "adjacent 24-sample local median shift exceeds 3.0×local MAD scale",
+        "uncertainty_note": "robust local MAD scale; not a statistical confidence interval"
+      },
+      {
+        "timestamp": "2021-05-23T07:00:00+00:00",
+        "segment_id": 0,
+        "median_shift_c": -0.8210559539283171,
+        "robust_scale_c": 0.2527792295112983,
+        "evidence": "adjacent 24-sample local median shift exceeds 3.0×local MAD scale",
+        "uncertainty_note": "robust local MAD scale; not a statistical confidence interval"
+      },
+      {
+        "timestamp": "2021-07-16T11:00:00+00:00",
+        "segment_id": 0,
+        "median_shift_c": 0.4907456840092834,
+        "robust_scale_c": 0.15594903164947194,
+        "evidence": "adjacent 24-sample local median shift exceeds 3.0×local MAD scale",
+        "uncertainty_note": "robust local MAD scale; not a statistical confidence interval"
+      }
+    ],
+    "validation": [],
+    "test": [
+      {
+        "timestamp": "2021-12-19T02:00:00+00:00",
+        "segment_id": 1,
+        "median_shift_c": -0.23170646225917935,
+        "robust_scale_c": 0.07077926212640129,
+        "evidence": "adjacent 24-sample local median shift exceeds 3.0×local MAD scale",
+        "uncertainty_note": "robust local MAD scale; not a statistical confidence interval"
+      }
+    ]
+  },
+  "association_hypotheses_ranked": [
+    {
+      "covariate": "Tout",
+      "spearman_rho": 0.7167224299220945,
+      "interval": {
+        "estimate": 0.7167224299220945,
+        "lower": 0.6723585865484614,
+        "upper": 0.7505206263998481,
+        "confidence": 0.95,
+        "replicates": 300,
+        "block_size": 24
+      },
+      "classification": "strong_association",
+      "wording": "association only; no causal attribution"
+    },
+    {
+      "covariate": "Qhvac_W_A",
+      "spearman_rho": -0.02068045130331077,
+      "interval": {
+        "estimate": -0.02068045130331077,
+        "lower": -0.14383196375041288,
+        "upper": 0.08099060050843722,
+        "confidence": 0.95,
+        "replicates": 300,
+        "block_size": 24
+      },
+      "classification": "no_clear_association",
+      "wording": "association only; no causal attribution; Q interpretation retains the fixed Tin-block-A / meter-335546926 caveat"
+    }
+  ],
+  "initialization_sensitivity": {
+    "route": "B",
+    "sampled_starts": 32,
+    "train_mse_q05_q95": [
+      3.258464021980494,
+      74.39578818749752
+    ],
+    "validation_bic_q05_q95": [
+      4266.755676111827,
+      6583.718177801319
+    ],
+    "interpretation": "empirical range over sampled initialisations, not a statistical confidence interval"
+  },
+  "limitations": [
+    "Residual associations are not causal attributions.",
+    "The correction is a diagnostic train-only offset, not an independently identified physical parameter.",
+    "Sampled-initialisation ranges are not statistical confidence intervals.",
+    "No individual wall, facade, glazing or energy-saving quantity is identified."
+  ],
+  "m4_conclusion": "VALIDATED_INITIALIZATION_SENSITIVE"
+}

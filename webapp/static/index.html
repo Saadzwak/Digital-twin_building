@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Thermal Twin — 98 Rue des Sarrazins, Lille</title>
+  <link rel="stylesheet" href="/static/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' fill='%23070a0f'/><rect x='4' y='6' width='8' height='7' fill='none' stroke='%2337e0c8'/></svg>" />
+</head>
+<body>
+  <div id="app">
+    <div class="topbar">
+      <div class="brand">
+        <h1>THERMAL<span style="color:var(--cyan)">·</span>TWIN</h1>
+        <span class="tag">98 Rue des Sarrazins · Wazemmes, Lille</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px">
+        <span class="runsource" id="run-source"></span>
+        <span><span class="status-dot"></span> <span class="faint" style="font-size:11px">ONLINE</span></span>
+      </div>
+    </div>
+
+    <!-- LANDING -->
+    <section id="screen-landing" class="landing fade-in">
+      <div class="eyebrow kicker">Thermal diagnosis from measurements</div>
+      <h2>Your building, <span class="accent">explained</span> by its data.</h2>
+      <p class="lede">Drop in a plan and a year of measurements. The platform explores a space of thermal models
+        live, calibrates a twin, dates the moment the building stops behaving as expected,
+        and quantifies interventions — always with their uncertainty.</p>
+
+      <div class="dropzones">
+        <label class="dz" id="dz-pdf">
+          <h3>Building plan · PDF</h3>
+          <p>Optional. Geometry stays subject to validation before any use.</p>
+          <input type="file" id="file-pdf" accept="application/pdf" multiple />
+          <div class="pick btn ghost" data-for="file-pdf">Choose a PDF</div>
+        </label>
+        <label class="dz" id="dz-csv">
+          <h3>Measurements · CSV</h3>
+          <p>Timestamp, indoor temperature, outdoor temperature, HVAC power. ≥ 1000 h.</p>
+          <input type="file" id="file-csv" accept=".csv" />
+          <div class="pick btn ghost" data-for="file-csv">Choose a CSV</div>
+        </label>
+      </div>
+      <div class="cta-row">
+        <button class="btn" id="btn-analyze-upload" disabled style="opacity:.5">Analyze my files</button>
+        <span class="faint" id="upload-status" style="font-size:12px"></span>
+      </div>
+
+      <div class="divider-or">OR TRY IT RIGHT NOW</div>
+      <div class="cta-row">
+        <button class="btn" id="btn-demo">▶ Run the demo diagnosis</button>
+        <span class="faint" style="font-size:12px">Real building · one year of hourly measurements · real computation</span>
+      </div>
+    </section>
+
+    <!-- EXECUTION -->
+    <section id="screen-exec" class="exec hidden">
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:16px">
+        <div>
+          <div class="eyebrow">Exploring the model space</div>
+          <div class="counter" id="exec-counter">STRUCTURE 0/19 <small id="exec-substep">· start 0/0</small></div>
+        </div>
+        <div style="text-align:right">
+          <div class="eyebrow" id="exec-mode">INITIALIZING</div>
+          <div class="faint" style="font-size:12px" id="exec-elapsed">0 s</div>
+        </div>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="exec-progress"></div></div>
+
+      <div class="exec-grid" style="margin-top:16px">
+        <div class="panel building-wrap">
+          <svg class="building-svg" id="exec-building" data-w="560" data-h="420"></svg>
+          <div class="honesty" id="exec-honesty"></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div class="panel">
+            <div class="panel-h"><span class="t">RC structure under test</span><span class="t faint" id="topo-name">—</span></div>
+            <div class="panel-b"><svg class="topo-svg" id="exec-topo"></svg></div>
+          </div>
+          <div class="panel">
+            <div class="panel-h"><span class="t">Complexity vs error</span><span class="t faint">each point = 1 structure</span></div>
+            <div class="panel-b"><svg class="scatter-svg" id="exec-scatter"></svg></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top:16px">
+        <div class="panel-h"><span class="t">Execution log</span></div>
+        <div class="panel-b" id="exec-stages" style="max-height:150px;overflow:auto"></div>
+      </div>
+    </section>
+
+    <!-- ONBOARDING -->
+    <section id="screen-onboarding" class="dash hidden">
+      <div class="eyebrow">Before the diagnosis</div>
+      <h2 class="display" style="font-size:30px;margin:10px 0 6px">4 questions to bound what the diagnosis may claim</h2>
+      <p class="dim" style="margin-bottom:20px">Answering “unknown” is a valid answer: the dashboard adapts to it.</p>
+      <div class="panel"><div class="panel-b" id="onboarding-questions"></div></div>
+      <div style="margin-top:18px"><button class="btn" id="btn-onboarding-done">Open the dashboard</button></div>
+    </section>
+
+    <!-- DASHBOARD -->
+    <section id="screen-dash" class="dash hidden"></section>
+  </div>
+
+  <script type="module" src="/static/js/app.js"></script>
+</body>
+</html>

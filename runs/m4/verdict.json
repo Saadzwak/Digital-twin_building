@@ -1,0 +1,64 @@
+{
+  "protocol": "uniform_multistart_notebook_cell_55",
+  "validated": true,
+  "validation_route": "B",
+  "verdict": "B",
+  "criterion_a": {
+    "passed": false,
+    "definition": "STD_4R3C has the strictly lowest validation BIC among train-MSE-selected starts and a predeclared >=10.0 BIC gap to second place.",
+    "std_4r3c_validation_bic": 4774.779758748735,
+    "next_best_model": "LADDER_1R1C",
+    "bic_gap_to_next": -36.431678383514736
+  },
+  "criterion_b": {
+    "passed": true,
+    "definition": "Oracle passes; all 19 labels use the identical logged start protocol; empirical sampled-start dispersion is recorded.",
+    "oracle_passed": true,
+    "uniform_protocol": true,
+    "dispersion_documented": true
+  },
+  "config": {
+    "dt_seconds": 3600.0,
+    "n_starts": 32,
+    "rng": "numpy.random.PCG64",
+    "seed": 7096790
+  },
+  "selection_rule": "Minimum train MSE only; validation and test were never used to select a restart.",
+  "residual_convention": "Tin_measured - Tin_estimated",
+  "sensitivity_banner_required": true,
+  "sensitivity_by_structure": {
+    "LADDER_1R1C": "sensitive_to_initialization",
+    "LADDER_2R2C": "sensitive_to_initialization",
+    "LADDER_3R3C": "sensitive_to_initialization",
+    "LADDER_4R4C": "sensitive_to_initialization",
+    "LADDER_5R5C": "sensitive_to_initialization",
+    "LADDER_6R6C": "sensitive_to_initialization",
+    "LADDER_7R7C": "sensitive_to_initialization",
+    "LADDER_8R8C": "sensitive_to_initialization",
+    "LADDER_9R9C": "sensitive_to_initialization",
+    "LADDER_10R10C": "sensitive_to_initialization",
+    "STD_1R1C": "sensitive_to_initialization",
+    "STD_2R1C_parallel_losses": "sensitive_to_initialization",
+    "STD_2R2C_air_mass": "sensitive_to_initialization",
+    "STD_3R2C_air_shunt": "sensitive_to_initialization",
+    "STD_3R3C_two_masses_series": "sensitive_to_initialization",
+    "STD_4R3C_two_masses_plus_air_shunt": "sensitive_to_initialization",
+    "STD_5R3C_air_shunt_mid_shunt": "sensitive_to_initialization",
+    "STD_6R4C_three_masses_plus_shunts": "sensitive_to_initialization",
+    "STD_7R5C_four_masses_plus_shunts": "sensitive_to_initialization"
+  },
+  "conclusion": "VALIDATED_INITIALIZATION_SENSITIVE",
+  "artifact_integrity": {
+    "all_starts_sha256": "a9ba009bce9e3659d34381b336bbef363f346e4e58897de0a10b571656e56454",
+    "selected_by_train_mse_sha256": "0a629e917f449cd03368a2368c6ffff60cb645e12f2ada6d5e03dcfa0554267c",
+    "basin_dispersion_sha256": "d92bd2a1676fcef4324b8c3ef92a305c379019a3d6a5400ee0bb29cf99d49990",
+    "outcome_count": 608,
+    "unique_model_start_pairs": 608,
+    "config": {
+      "dt_seconds": 3600.0,
+      "n_starts": 32,
+      "rng": "numpy.random.PCG64",
+      "seed": 7096790
+    }
+  }
+}

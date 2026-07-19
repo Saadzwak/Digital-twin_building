@@ -1,0 +1,59 @@
+{
+  "first": {
+    "model": "STD_1R1C",
+    "n_parameters": 3,
+    "resistances": [
+      148.40888804068427
+    ],
+    "capacitances": [
+      1647978381.069584
+    ],
+    "alpha": 0.27285281556780694,
+    "success": true,
+    "status": 0,
+    "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+    "nfev": 300,
+    "nit": 35,
+    "objective_mse": 3.2585125107328645,
+    "residual_convention": "Tin_measured - Tin_estimated"
+  },
+  "second": {
+    "model": "STD_1R1C",
+    "n_parameters": 3,
+    "resistances": [
+      148.40888804068427
+    ],
+    "capacitances": [
+      1647978381.069584
+    ],
+    "alpha": 0.27285281556780694,
+    "success": true,
+    "status": 0,
+    "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+    "nfev": 300,
+    "nit": 35,
+    "objective_mse": 3.2585125107328645,
+    "residual_convention": "Tin_measured - Tin_estimated"
+  },
+  "first_validation": {
+    "n_observations": 1464,
+    "n_parameters": 3,
+    "rmse": 5.006512663631407,
+    "mae": 4.309543444297735,
+    "rss": 36695.40749081281,
+    "aic": 4722.245541774362,
+    "bic": 4738.112324857926,
+    "residual_mean": -4.296168734520931
+  },
+  "second_validation": {
+    "n_observations": 1464,
+    "n_parameters": 3,
+    "rmse": 5.006512663631407,
+    "mae": 4.309543444297735,
+    "rss": 36695.40749081281,
+    "aic": 4722.245541774362,
+    "bic": 4738.112324857926,
+    "residual_mean": -4.296168734520931
+  },
+  "parameter_vectors_bitwise_equal": true
+}
